@@ -28,6 +28,33 @@ class ARRAY:
             if self.array[i] == value:
                 return i
         return -1
+
+    def binary_search_array(self, value: chr):
+        if self.n == 0:
+            print("No hay elementos en el array")
+            return -1
+        left = 0
+        right = self.n - 1
+        while left <= right:
+            middle = (left + right) // 2
+            if self.array[middle] == value:
+                return middle
+            elif VALUES[self.array[middle]] < VALUES[value]:
+                left = middle + 1
+            else:
+                right = middle - 1
+        return -1
+
+    def optimizated_search_array(self, value: chr):
+        if self.n == 0:
+            print("No hay elementos en el array")
+            return -1
+        for i in range(self.n):
+            if VALUES[self.array[i]] == VALUES[value]:
+                return i
+            elif VALUES[self.array[i]] > VALUES[value]:
+                return -1
+        return -1
     
     def insert_value(self, value: chr):
         if self.n == len(self.array):
@@ -70,7 +97,8 @@ class ARRAY:
         self.n -= 1
         return self.array
 
-if __name__ == "__main__":
+
+def main():
     user_array = ARRAY(20)
 
     user_input = input("Selecciona una opción: \n"
@@ -84,7 +112,7 @@ if __name__ == "__main__":
             user_array.show_array()
         elif user_input == "2":
             value = input("Introduce el valor a buscar: ")
-            print("Índice:", user_array.search_array(value))
+            print("Índice:", user_array.binary_search_array(value))
         elif user_input == "3":
             value = input("Introduce el valor a insertar: ")
             user_array.insert_value(value)
@@ -100,3 +128,7 @@ if __name__ == "__main__":
 
     print("Saliendo del programa...")
     print("Array final:", user_array.array)
+
+if __name__ == "__main__":
+    main()
+
